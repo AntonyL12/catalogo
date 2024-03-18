@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+
+<body>
+
+    <script>
+        const Catalogo_de_produtos = [];
+
+        // add produto
+        function adicionarProdt() {
+            const nome = prompt("digite o nome do produto");
+            const preco = parseFloat(prompt("digite o valor do produto"));
+            const descri = prompt("digite a descrição do produto digitado");
+            const quant = prompt("digite a quantidade do produto");
+
+            const produto = { nome, preco, descri, quant };
+            Catalogo_de_produtos.push(produto);
+            alert("Produto adicionado");
+        }
+
+        //buscar produto
+        function buscar() {
+            const nome = prompt("Digite o nome do produto");
+
+            let produto = Catalogo_de_produtos.find((produto) => {
+            return produto.nome === nome;
+            });
+
+            if (produto) {
+                alert(`Nome: ${produto.nome}\nDescrição: ${produto.descri}\nQuantidade: ${produto.quant}\nPreço: ${produto.preco}`);
+            } else {
+                alert("Produto não encontrado");
+            }
+        }
+
+        //atualizar produto
+        function atualizarProduto() {
+            const nome = prompt("Digite o nome do produto para atualizar");
+            const produto = Catalogo_de_produtos.find(produto => produto.nome === nome);
+
+            if (produto) {
+                produto.nome = prompt("Digite o novo produto");
+                produto.preco = parseFloat(prompt("Digite o novo preço"));
+                produto.descri = prompt("Digite a nova descrição");
+                produto.quant = prompt("Digite a nova quantidade");
+                alert("Produto atualizado");
+            } else {
+                alert("Produto não encontrado");
+            }   
+        }
+
+        //listar todos os produtos
+        function listarProdutos() {
+            let listaProdutos = "";
+            for (let i = 0; i < Catalogo_de_produtos.length; i++) {
+                const produto = Catalogo_de_produtos[i];
+                listaProdutos += `Nome: ${produto.nome}\nDescrição: ${produto.descri}\nQuantidade: ${produto.quant}\nPreço: ${produto.preco}\n\n`;
+            }
+            if (listaProdutos !== "") {
+                alert(listaProdutos);
+            } else {
+                alert("Nenhum produto encontrado");
+            }
+        }
+
+        //Remover produto
+        function remover() {
+            const nome = prompt("Digite o nome do produto para remover ");
+            const Produto = Catalogo_de_produtos.findIndex(produto => produto.nome === nome);
+
+            if (Produto !== -1) {
+                Catalogo_de_produtos.splice(Produto, 1);
+                alert("Produto removido");
+            } else {
+                alert("Produto não encontrado");
+            }
+
+        }
+
+        //parte da exibição da tela
+        function exibirTela() {
+            let opcao = prompt(`Sair - 0\nAdicionar Produto - 1\nVer Produto - 2\nAtualizar Produto - 3\nListar produto - 4\nRemover produto - 5`);
+
+            return opcao;
+        }
+
+        let opcao;
+        
+        do{
+
+            opcao = exibirTela();
+
+            if (opcao === "0") {
+                break;
+            }
+
+            if(opcao === "1") {
+                adicionarProdt();
+            } else if (opcao === "2") {
+                buscar();
+            } else if (opcao === "3"){
+                atualizarProduto();
+            } else if(opcao === "4"){
+                listarProdutos();
+            } else if (opcao === "5"){
+                remover();
+            } else{
+                alert("Número inválido");
+            }
+        }while(true);
+    </script>
+</body>
+</html>
